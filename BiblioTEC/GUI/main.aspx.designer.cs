@@ -67,6 +67,60 @@ namespace BiblioTEC.GUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl resultadoTranslate;
         
         /// <summary>
+        /// checkLibreria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox checkLibreria;
+        
+        /// <summary>
+        /// checkTema control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox checkTema;
+        
+        /// <summary>
+        /// checkPrecio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox checkPrecio;
+        
+        /// <summary>
+        /// checkNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox checkNombre;
+        
+        /// <summary>
+        /// txtPrecioMin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioMin;
+        
+        /// <summary>
+        /// txtPrecioMax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioMax;
+        
+        /// <summary>
         /// columnaPrueba control.
         /// </summary>
         /// <remarks>

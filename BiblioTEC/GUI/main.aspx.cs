@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using Google.Cloud.Translation.V2;
 using Google.Apis.Auth.OAuth2;
+using BiblioTEC.Objects;
 
 namespace BiblioTEC.GUI
 {
@@ -14,23 +15,20 @@ namespace BiblioTEC.GUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
+            if (!IsPostBack)
             {
 
-                HtmlGenericControl temp = NuevoLibro("titulo del libro", "tema del libro", "32", "" + i);
-                bookList.Controls.Add(temp);
-               // booklist2.Controls.Add(temp);
-               
-            }
+                string path = HttpContext.Current.Request.Url.AbsolutePath;
+                path = path.Replace("/", ",");
+                string[] elements = path.Split(',');
 
-            for (int i = 0; i < 10; i++)
-            {
+                string userId= elements[elements.Length - 1];
 
-                HtmlGenericControl temp = NuevoLibro("titulo del libro", "tema del libro", "32", "" + i);
-                //bookList.Controls.Add(temp);
-                bookList2.Controls.Add(temp);
+                getBooks(20);
+                
 
             }
+            
         }
 
         protected void btnCarrito_Click (object sender, EventArgs e)
@@ -77,16 +75,62 @@ namespace BiblioTEC.GUI
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            string text = txtBuscar.Text;
-            // string selection = DDList_Idiomas.SelectedItem.Text;
+            /* string text = txtBuscar.Text;
+             // string selection = DDList_Idiomas.SelectedItem.Text;
 
-            var credential = GoogleCredential.FromFile("D:/TEC/Projects/BiblioTEC/GoogleCredentials.json");
+             var credential = GoogleCredential.FromFile("D:/TEC/Projects/BiblioTEC/GoogleCredentials.json");
 
+
+             TranslationClient client = TranslationClient.Create(credential);
+             var response = client.TranslateText(text, "ru");
+
+             resultadoTranslate.InnerText = response.ToString();*/
+            int quantity = Int32.Parse(txtBuscar.Text);
+            getBooks(quantity);
+            bool libreBool = checkLibreria.Checked;
+            bool temaBool = checkTema.Checked;
+            bool precioBool = checkPrecio.Checked;
+            bool nombreBool = checkNombre.Checked;
+        }
+
+        protected void getBooks(int identifier)
+        {
+            List<HtmlGenericControl> result = new List<HtmlGenericControl>();
             
-            TranslationClient client = TranslationClient.Create(credential);
-            var response = client.TranslateText(text, "ru");
+               
+            for (int i = 0; i < (identifier +1) ; i++)
+            {
+                HtmlGenericControl temp = NuevoLibro("titulo del libro", "tema del libro", "32", "" + i);
+                result.Add(temp);
+            }
 
-            resultadoTranslate.InnerText = response.ToString();
+            bookList.Controls.Clear();
+            bookList2.Controls.Clear();
+
+            //int lengh = Arr.lengh();
+            int lengh = result.Count - 1;
+            int midway = lengh / 2;
+            int remainder = lengh - midway;
+
+
+
+            for (int i = 0; i < (remainder + 1); i++)
+            {
+
+                HtmlGenericControl temp = result.ElementAt(i);
+                bookList.Controls.Add(temp);
+                // booklist2.Controls.Add(temp);
+
+            }
+
+            for (int i = remainder; i < (midway + 1); i++)
+            {
+
+                HtmlGenericControl temp = result.ElementAt(i);
+                //bookList.Controls.Add(temp);
+                bookList2.Controls.Add(temp);
+
+            }
         }
     }
 }

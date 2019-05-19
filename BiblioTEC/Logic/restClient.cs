@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace BiblioTEC.Logic
     {
         public string endPoint { get; set; }
         public httpVerb httpMethod { get; set; }
+        public string result { get; set; }
         public restClient()
         {
             endPoint = string.Empty;
@@ -46,6 +48,19 @@ namespace BiblioTEC.Logic
             string strResponseValue = string.Empty;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
             request.Method = httpMethod.ToString();
+
+            /*
+            request.ContentType = "application/json";
+            using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+            {
+
+                writer.Write(body);
+                writer.Flush();
+                writer.Close();
+                }
+             */
+        
+
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
                 if (response.StatusCode != HttpStatusCode.OK)
@@ -64,6 +79,33 @@ namespace BiblioTEC.Logic
                 }
             }
             return strResponseValue;
+        }
+
+        public async Task<string> GetRequestAsync(string json)
+        {
+           
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpMethod reqMethod = new HttpMethod("GET");
+                HttpRequestMessage message = new HttpRequestMessage(reqMethod,endPoint);
+                message.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                
+
+                using (HttpResponseMessage response = await client.SendAsync(message))
+                {
+                  
+                    using (HttpContent content = response.Content)
+                    {
+                        string myContent = await content.ReadAsStringAsync();
+                       
+                       
+                        return myContent;
+                    }
+                }
+            }
+
+           
         }
     }
 }

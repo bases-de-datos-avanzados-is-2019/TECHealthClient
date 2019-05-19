@@ -73,6 +73,50 @@
                    </div>
 
                    <p class="card-text" id="resultadoTranslate" runat="server">resultado</p>
+
+                   <div class="row">
+                       <div class="col">
+                           <h3> Filtros </h3>
+                           <asp:CheckBox id="checkLibreria" runat="server"
+                                AutoPostBack="False"
+                                Text="Libreria"
+                                TextAlign="Right"
+                                CssClass="form-check"
+                            />
+
+                           <asp:CheckBox id="checkTema" runat="server"
+                                AutoPostBack="False"
+                                Text="Tema"
+                                TextAlign="Right"
+                                CssClass="form-check"
+                            />
+
+                           <asp:CheckBox id="checkPrecio" runat="server"
+                                AutoPostBack="False"
+                                Text="Precio"
+                                TextAlign="Right"
+                             
+                                CssClass="form-check"
+                            />
+
+                           <asp:CheckBox id="checkNombre" runat="server"
+                                AutoPostBack="False"
+                                Text="nombre"
+                                TextAlign="Right"
+                            
+                                CssClass="form-check"
+                            />
+                       </div>
+                   </div>
+
+                   <div class="row">
+                       <h3> Rango de Precios</h3>
+                   </div>
+
+                   <div class="row">
+                       <h5>Desde $</h5> <asp:TextBox ID="txtPrecioMin" runat="server" CssClass="form-control" style=" float:left; width:100px; margin-right:50px"></asp:TextBox>
+                       <h5 style="margin-left:50px">Hasta $</h5> <asp:TextBox ID="txtPrecioMax" runat="server" CssClass="form-control" style=" float:left; width:100px"></asp:TextBox>
+                   </div>
                </div>
 
                 <!-- Lista Libros -->

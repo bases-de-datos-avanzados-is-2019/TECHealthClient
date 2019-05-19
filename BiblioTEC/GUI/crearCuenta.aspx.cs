@@ -65,6 +65,9 @@ namespace BiblioTEC.GUI
 
         }
 
+        /*
+         * From brave: <3
+         */
         protected void btnCrearCuenta_Click(object seder, EventArgs e)
         {
             try

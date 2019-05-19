@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BiblioTEC.Logic;
+
 
 namespace BiblioTEC.GUI
 {
@@ -30,7 +32,34 @@ namespace BiblioTEC.GUI
         protected void btnLogin_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("~/GUI/main.aspx");
+            //Response.Redirect("~/GUI/main.aspx");
+            requestManager request = new requestManager();
+
+            string id = txtIdentificacion.Text;
+            string pass = txtPassword.Text;
+
+            string[] result = request.logIn(id, pass);
+
+            switch (result[1])
+            {
+                case "cliente":
+                    Response.Redirect("~/GUI/main.aspx/" + result[0]);
+                    break;
+
+                case "agente":
+                    //Response.Redirect("~/GUI/mainAgente.aspx/" + result[0]);
+
+                    break;
+
+                case "administrador":
+                    //Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
+                    break;
+
+                default:
+                    break;
+            }
+            
+
 
         }
 
