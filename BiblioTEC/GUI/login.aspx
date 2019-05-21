@@ -29,7 +29,7 @@
             This is a primary alert—check it out!
         </div>
 
-        <div class="container-fluid" style="margin-top: 75px">
+        <div class="container-fluid" style="margin-top: 75px; background: url(Assets/lockWlpp.jpeg)">
 
 
 

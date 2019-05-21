@@ -13,8 +13,10 @@ namespace BiblioTEC.GUI
 {
     public partial class main : System.Web.UI.Page
     {
+        private string user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
 
@@ -22,7 +24,7 @@ namespace BiblioTEC.GUI
                 path = path.Replace("/", ",");
                 string[] elements = path.Split(',');
 
-                string userId= elements[elements.Length - 1];
+                this.user = elements[elements.Length - 1];
 
                 getBooks(20);
                 
@@ -42,7 +44,7 @@ namespace BiblioTEC.GUI
             HtmlGenericControl element = new HtmlGenericControl("a");
             element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
             element.Attributes.Add("runat", "server");
-            element.Attributes.Add("href", "crearCuenta.aspx/" + id);
+            element.Attributes.Add("href", "bookInfo.aspx/" + this.user + "/" + id);
 
             HtmlGenericControl titulo = new HtmlGenericControl("div");
             titulo.Attributes.Add("class", "d-flex justify-content-between");
@@ -87,10 +89,41 @@ namespace BiblioTEC.GUI
              resultadoTranslate.InnerText = response.ToString();*/
             int quantity = Int32.Parse(txtBuscar.Text);
             getBooks(quantity);
+            string busqueda = txtBuscar.Text;
             bool libreBool = checkLibreria.Checked;
             bool temaBool = checkTema.Checked;
             bool precioBool = checkPrecio.Checked;
             bool nombreBool = checkNombre.Checked;
+
+            List<string> filters = new List<string>();
+
+            bookSearch myBook = new bookSearch();
+
+            if (libreBool)
+            {
+                myBook.libreria = busqueda;
+                filters.Add("libreria");
+            }
+            if (temaBool)
+            {
+                myBook.tema = busqueda;
+                filters.Add("tema");
+            }
+            if (nombreBool)
+            {
+                myBook.nombre = busqueda;
+                filters.Add("nombre");
+            }
+            if (precioBool)
+            {
+                myBook.precioMin = Int32.Parse(txtPrecioMin.Text);
+                myBook.precioMax = Int32.Parse(txtPrecioMax.Text);
+                filters.Add("precio");
+            }
+
+            string[] filtro = filters.ToArray();
+            myBook.filtros = filtro;
+
         }
 
         protected void getBooks(int identifier)
@@ -106,27 +139,31 @@ namespace BiblioTEC.GUI
 
             bookList.Controls.Clear();
             bookList2.Controls.Clear();
-
-            //int lengh = Arr.lengh();
-            int lengh = result.Count - 1;
+            HtmlGenericControl[] Arr = result.ToArray();
+            int lengh = Arr.Length - 1;
+            //int lengh = result.Count - 1;
             int midway = lengh / 2;
             int remainder = lengh - midway;
 
+            txtPrecioMax.Text = "" + midway;
+            txtPrecioMin.Text = "" + remainder;
+            txtBuscar.Text = "" + lengh;
 
 
-            for (int i = 0; i < (remainder + 1); i++)
+
+            for (int i = 0; i <= remainder; i++)
             {
 
-                HtmlGenericControl temp = result.ElementAt(i);
+                HtmlGenericControl temp = Arr[i];
                 bookList.Controls.Add(temp);
                 // booklist2.Controls.Add(temp);
 
             }
 
-            for (int i = remainder; i < (midway + 1); i++)
+            for (int i = 0; i < midway; i++)
             {
 
-                HtmlGenericControl temp = result.ElementAt(i);
+                HtmlGenericControl temp = Arr[(remainder + 1) + i];
                 //bookList.Controls.Add(temp);
                 bookList2.Controls.Add(temp);
 

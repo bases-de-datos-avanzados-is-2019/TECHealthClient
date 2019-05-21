@@ -12,5 +12,6 @@ namespace BiblioTEC.Objects
         public string tema { set; get; }
         public int precioMin { set; get; }
         public int precioMax { set; get; }
+        public string[] filtros { set; get; }
     }
 }

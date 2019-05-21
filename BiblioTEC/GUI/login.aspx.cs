@@ -18,6 +18,7 @@ namespace BiblioTEC.GUI
 
             if (!IsPostBack)
             {
+                Page.Response.Cache.SetCacheability(HttpCacheability.NoCache);
                 alertError.Visible = false;
                 error = 0;
             }
@@ -36,28 +37,31 @@ namespace BiblioTEC.GUI
             requestManager request = new requestManager();
 
             string id = txtIdentificacion.Text;
-            string pass = txtPassword.Text;
+             string pass = txtPassword.Text;
 
-            string[] result = request.logIn(id, pass);
+             string[] result = request.logIn(id, pass);
 
-            switch (result[1])
-            {
-                case "cliente":
-                    Response.Redirect("~/GUI/main.aspx/" + result[0]);
-                    break;
+             switch (result[1])
+             {
+                 case "cliente":
+                     Response.Redirect("~/GUI/main.aspx/" + result[0]);
+                     break;
 
-                case "agente":
-                    //Response.Redirect("~/GUI/mainAgente.aspx/" + result[0]);
+                 case "agente":
+                     //Response.Redirect("~/GUI/mainAgente.aspx/" + result[0]);
 
-                    break;
+                     break;
 
-                case "administrador":
-                    //Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
-                    break;
+                 case "administrador":
+                     //Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
+                     break;
 
-                default:
-                    break;
-            }
+                 default:
+                    txtIdentificacion.Text = result[1];
+                     break;
+             }
+
+            //txtIdentificacion.Text = request.testConnection();
             
 
 

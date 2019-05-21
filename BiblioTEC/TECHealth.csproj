@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="GUI\bookInfo.aspx" />
     <Content Include="GUI\crearCuenta.aspx" />
     <Content Include="GUI\login.aspx" />
     <Content Include="GUI\main.aspx" />
@@ -265,6 +266,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GUI\bookInfo.aspx.cs">
+      <DependentUpon>bookInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\bookInfo.aspx.designer.cs">
+      <DependentUpon>bookInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\crearCuenta.aspx.cs">
       <DependentUpon>crearCuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,6 +304,7 @@
     <Compile Include="Logic\requestManager.cs" />
     <Compile Include="Logic\restClient.cs" />
     <Compile Include="Objects\book.cs" />
+    <Compile Include="Objects\bookSearch.cs" />
     <Compile Include="Objects\bookStore.cs" />
     <Compile Include="Objects\logIn.cs" />
     <Compile Include="Objects\user.cs" />

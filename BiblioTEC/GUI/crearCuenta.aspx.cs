@@ -4,15 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BiblioTEC.Logic;
 
 namespace BiblioTEC.GUI
 {
     public partial class crearCuenta : System.Web.UI.Page
     {
+        private string user;
+        private bool isEdit = false;
+        private requestManager client;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+
+                 this.client = new requestManager();
                 ListItem m = new ListItem("Regular"    , "1");
                 ListItem m2 = new ListItem("Frecuente" , "2");
 
@@ -45,11 +51,17 @@ namespace BiblioTEC.GUI
 
                 errorAlert.Visible = false;
 
-              /*  string path = HttpContext.Current.Request.Url.AbsolutePath;
+              string path = HttpContext.Current.Request.Url.AbsolutePath;
                 path = path.Replace("/", ",");
                 string[] elements = path.Split(',');
                 
-                txtNombre.Text = elements[elements.Length - 1]; */
+                this.user = elements[elements.Length - 1];
+
+                if (user != "crearCuenta")
+                {
+                    this.isEdit = true;
+                    btnCrearCuenta.Text = "GUARDAR CAMBIOS";
+                }
 
 
             }
@@ -89,18 +101,39 @@ namespace BiblioTEC.GUI
                 telefonosTemp = telefonosTemp.Replace(" ", String.Empty);
                 string[] telefonos = telefonosTemp.Split(',');
 
+                string result = "";
+
                 if (contra.Equals(contra2))
                 {
-                    // do something
+                   result =  this.client.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos);
+
+                    if(result == "aceptado")
+                    {
+                        Response.Redirect("~/GUI/login.aspx");
+                    }
+                    else
+                    {
+                        showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                    }
                 }
                 else
                 {
                     showAlert("Las contrasenas ingresadas no coinciden. Intentalo nuevamente!");
                 }
 
-            } catch (Exception)
+            } catch (Exception ex)
             {
-                showAlert("Error a la hora de ingresar los tipos de dato");
+                showAlert(ex.Message +" " +  ex.Source + "" + ex.StackTrace);
+               
+            }
+
+            if (this.isEdit)
+            {
+
+            }
+            else
+            {
+
             }
             
         }

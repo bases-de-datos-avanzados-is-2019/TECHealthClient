@@ -19,15 +19,14 @@
     <!--Linea Azul arriba de la pagina-->
     <form id="form1" runat="server">
         <nav class="navbar navbar-dark" style="background-color: #0b4980;">
-            <a class="navbar-brand" href="#">BiblioTEC</a>
-            <div class="row">
+            <a class="navbar-brand" href="main.aspx">BiblioTEC</a>
+         
+            <div class=" navbar-expand-lg" style="margin-left:25px; margin-right:25px">
                 
-                  <div style="margin-left:25px; margin-right:25px">
-                      <div class="row">
 
-                          
-
-                         <li class="nav-item dropdown">
+                          <ul class="navbar-nav mr-auto">
+                              <div class="row">
+                                      <li class="nav-item dropdown" style="margin-right:15px">
                             <a class="nav-link dropdown-toggle" href="#" id="btnPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; margin:5px">
                                 <i class="fa fa-fw fa-user" style="color:white"></i>
                               Perfil
@@ -40,20 +39,18 @@
                             </div>
                           </li>
 
-                          <a href="#" style="color:white; margin:5px" id="btnCarrito" runat="server" onserverclick="btnCarrito_Click"><i class="fa fa-fw fa-shopping-cart" style="color:white"></i> Carrito</a>
-
-                      </div>
-                      
-                </div>
-                
-                
+                          </li class="nav-item active">
+                            <a href="#" style="color:white; margin:12px" id="btnCarrito" runat="server" ><i class="fa fa-fw fa-shopping-cart" style="color:white"></i> Carrito</a>
+                          </li>
 
 
-                
+                              </div>
+                          
+
+                          </ul>
+ 
             </div>
-            
-
-            
+                  
         </nav>
 
         <div class="container-fluid" style="margin-bottom: 75px">
