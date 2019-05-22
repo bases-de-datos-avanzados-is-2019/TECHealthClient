@@ -19,7 +19,7 @@ namespace BiblioTEC.GUI
             if (!IsPostBack)
             {
                 Page.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                alertError.Visible = false;
+                errorAlert.Visible = false;
                 error = 0;
             }
 
@@ -57,7 +57,7 @@ namespace BiblioTEC.GUI
                      break;
 
                  default:
-                    txtIdentificacion.Text = result[1];
+                    showAlert(result[1]);
                      break;
              }
 
@@ -70,6 +70,12 @@ namespace BiblioTEC.GUI
         protected void recuperarContrasena_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void showAlert(string message)
+        {
+            errorAlert.InnerText = message;
+            errorAlert.Visible = true;
         }
 
 

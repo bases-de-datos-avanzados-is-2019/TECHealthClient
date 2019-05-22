@@ -25,9 +25,12 @@
         </nav>
 
         <!--Manejo de errores-->
-        <div class="alert alert-danger" role="alert" id="alertError" runat="server">
-            This is a primary alert—check it out!
-        </div>
+        <div class="alert alert-danger" role="alert" id="errorAlert" runat="server" visible="false">
+              A simple danger alert—check it out!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
         <div class="container-fluid" style="margin-top: 75px; background: url(Assets/lockWlpp.jpeg)">
 

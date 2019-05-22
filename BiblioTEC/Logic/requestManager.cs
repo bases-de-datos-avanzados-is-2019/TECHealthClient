@@ -107,6 +107,7 @@ namespace BiblioTEC.Logic
             string json = JsonConvert.SerializeObject(usuario);
 
             this.client.endPoint = this.URL + requestype + json;
+            //string result = this.client.endPoint;
             string getrequest = client.makeRequest(2);
             getrequest = getrequest.Replace("\"", "'");
             dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
@@ -136,12 +137,12 @@ namespace BiblioTEC.Logic
             getrequest = getrequest.Replace("\"", "'");
             dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
 
-            string[] result = jsonResult.resultado;
-            book[] resultado = new book[result.Length];
+            JArray result = jsonResult.resultado;
+            book[] resultado = new book[result.Count];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < result.Count; i++)
             {
-                dynamic libroJson = JsonConvert.DeserializeObject(result[i]);
+                dynamic libroJson = result.ElementAt(i);
 
                 book temp = new book()
                 {
@@ -208,6 +209,25 @@ namespace BiblioTEC.Logic
             }
 
             return resultado;
+        }
+
+        public string Prueba(string nombre, string libreria, string tema, int precioMin, int precioMax, string[] filtros)
+        {
+            bookSearch libros = new bookSearch()
+            {
+                nombre = nombre,
+                libreria = libreria,
+                tema = tema,
+                precioMin = precioMin,
+                precioMax = precioMax,
+                filtros = filtros
+            };
+
+            string requestype = "book/";
+            string json = JsonConvert.SerializeObject(libros);
+
+            this.client.endPoint = this.URL + requestype + json;
+            return this.client.endPoint;
         }
 
 

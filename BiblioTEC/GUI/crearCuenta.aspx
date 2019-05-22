@@ -75,7 +75,7 @@
 
                         <p class="card-text">Fecha de Nacimiento</p>
                         <div style="margin":"40px">                            
-                            <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control" placeholder="DD/MM/AA"></asp:TextBox>
+                            <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control" placeholder="DD-MM-AA"></asp:TextBox>
                         </div>
 
                         <p class="card-text">Tipo de Cliente</p>

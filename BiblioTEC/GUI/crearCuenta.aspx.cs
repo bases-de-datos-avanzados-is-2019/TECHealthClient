@@ -114,7 +114,8 @@ namespace BiblioTEC.GUI
                     }
                     else
                     {
-                        showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                         showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                        //showAlert(result);
                     }
                 }
                 else

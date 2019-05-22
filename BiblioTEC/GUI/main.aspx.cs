@@ -47,7 +47,7 @@ namespace BiblioTEC.GUI
             HtmlGenericControl element = new HtmlGenericControl("a");
             element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
             element.Attributes.Add("runat", "server");
-            element.Attributes.Add("href", "bookInfo.aspx/" + this.user + "/" + id);
+            element.Attributes.Add("href", "/GUI/bookInfo.aspx/" + this.user + "/" + id);
 
             HtmlGenericControl titulo = new HtmlGenericControl("div");
             titulo.Attributes.Add("class", "d-flex justify-content-between");
@@ -122,7 +122,7 @@ namespace BiblioTEC.GUI
             {
                 myBook.precioMin = Int32.Parse(txtPrecioMin.Text);
                 myBook.precioMax = Int32.Parse(txtPrecioMax.Text);
-                filters.Add("precio");
+                filters.Add("precios");
             }
 
             string[] filtro = filters.ToArray();
@@ -130,6 +130,9 @@ namespace BiblioTEC.GUI
 
             requestManager request = new requestManager();
             book[] lista = request.GetBooks(busqueda, busqueda, busqueda, precioMn, precioMx, filtro);
+            //txtBuscar.Text = lista;
+
+            
             getBooks(lista);
 
         }

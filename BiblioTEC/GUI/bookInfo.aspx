@@ -72,11 +72,11 @@
                        </div>
                    
                    
-                       <h5 style="color:cornflowerblue; margin-left:auto" class="card-text" id="bookId" runat="server">id</h5>
+                       <h5 style="color:cornflowerblue; margin-left:auto" class="card-text" id="bookIssn" runat="server">id</h5>
                        <h5 style="color:gray; margin-left:auto" class="card-text" id="bookTheme" runat="server">tema</h5>
 
                        <div style="margin-top:50px; margin-left:5px>
-                           <p class="card-text">
+                           <p class="card-text" id="bookDescription" runat="server">
 
                                Contratapa que no cumple con la función que el lector espera. Solución: Las contratapas suelen presentar en pocas líneas el resumen del argumento del libro. 
                                En otras ocasiones se opta reproducción literal de un pasaje del libro, cuidadosamente seleccionado para despertar interés por su lectura
@@ -94,7 +94,7 @@
                </div>
 
                 <div class="col-lg-2">
-                    <image src ="~/Assets/sample.jpg" width="350px" height="500px" allign-right="true"></image>
+                    <image src ="http://i.imgur.com/ozxH9ZY.png"  width="350px" height="500px" allign-right="true"></image>
 
                     <div class="row" style="margin:10px">
                            <div class="col-6">
