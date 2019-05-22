@@ -8,6 +8,7 @@ using System.Web.UI.HtmlControls;
 using Google.Cloud.Translation.V2;
 using Google.Apis.Auth.OAuth2;
 using BiblioTEC.Objects;
+using BiblioTEC.Logic;
 
 namespace BiblioTEC.GUI
 {
@@ -26,7 +27,9 @@ namespace BiblioTEC.GUI
 
                 this.user = elements[elements.Length - 1];
 
-                getBooks(20);
+                requestManager request = new requestManager();
+                book[] libros = request.GetBooks();
+                getBooks(libros);
                 
 
             }
@@ -87,9 +90,10 @@ namespace BiblioTEC.GUI
              var response = client.TranslateText(text, "ru");
 
              resultadoTranslate.InnerText = response.ToString();*/
-            int quantity = Int32.Parse(txtBuscar.Text);
-            getBooks(quantity);
+         
             string busqueda = txtBuscar.Text;
+            int precioMx = Int32.Parse( txtPrecioMax.Text);
+            int precioMn = Int32.Parse(txtPrecioMin.Text);
             bool libreBool = checkLibreria.Checked;
             bool temaBool = checkTema.Checked;
             bool precioBool = checkPrecio.Checked;
@@ -124,16 +128,24 @@ namespace BiblioTEC.GUI
             string[] filtro = filters.ToArray();
             myBook.filtros = filtro;
 
+            requestManager request = new requestManager();
+            book[] lista = request.GetBooks(busqueda, busqueda, busqueda, precioMn, precioMx, filtro);
+            getBooks(lista);
+
         }
 
-        protected void getBooks(int identifier)
+        protected void getBooks(book[] lista)
         {
             List<HtmlGenericControl> result = new List<HtmlGenericControl>();
             
                
-            for (int i = 0; i < (identifier +1) ; i++)
+            for (int i = 0; i < (lista.Length) ; i++)
             {
-                HtmlGenericControl temp = NuevoLibro("titulo del libro", "tema del libro", "32", "" + i);
+                string nombre = lista[i].nombre;
+                string id = "" + lista[i].issn;
+                string tema = lista[i].tema;
+                string precio = "" + lista[i].precioDolares;
+                HtmlGenericControl temp = NuevoLibro(nombre,tema,precio,id);
                 result.Add(temp);
             }
 

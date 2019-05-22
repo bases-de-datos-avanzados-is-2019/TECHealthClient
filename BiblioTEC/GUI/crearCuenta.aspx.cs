@@ -12,13 +12,13 @@ namespace BiblioTEC.GUI
     {
         private string user;
         private bool isEdit = false;
-        private requestManager client;
+ 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
 
-                 this.client = new requestManager();
+                
                 ListItem m = new ListItem("Regular"    , "1");
                 ListItem m2 = new ListItem("Frecuente" , "2");
 
@@ -101,11 +101,12 @@ namespace BiblioTEC.GUI
                 telefonosTemp = telefonosTemp.Replace(" ", String.Empty);
                 string[] telefonos = telefonosTemp.Split(',');
 
-                string result = "";
+          
 
                 if (contra.Equals(contra2))
                 {
-                   result =  this.client.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos);
+                    requestManager request = new requestManager();
+                    string result =  request.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos);
 
                     if(result == "aceptado")
                     {

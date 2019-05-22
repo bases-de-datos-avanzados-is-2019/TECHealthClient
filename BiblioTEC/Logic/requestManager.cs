@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BiblioTEC.Objects;
@@ -54,9 +55,7 @@ namespace BiblioTEC.Logic
 
 
              string getrequest = client.makeRequest(2);
-             Console.WriteLine("Before task");
-             //string getrequest = client.GetRequestAsync(json).Result;
-             Console.WriteLine("Task ended");
+          
              getrequest = getrequest.Replace("\"", "'");
              dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
              idUsuario = jsonResult.id;
@@ -86,6 +85,8 @@ namespace BiblioTEC.Logic
 
         public string crearCuenta(string nombre, string primerApellido, string segundoApellido, int cedula, string fechaNacimiento, string tipoUsuario, string ubicacion, string correoElectronico, string nombreUsuario, string password, string[] telefonos)
         {
+
+           
             user usuario = new user() {
 
                 nombre = nombre,
@@ -113,6 +114,100 @@ namespace BiblioTEC.Logic
             string result = jsonResult.mensaje;
             return result;
 
+        }
+
+        public book[] GetBooks(string nombre, string libreria, string tema, int precioMin, int precioMax, string[] filtros)
+        {
+            bookSearch libros = new bookSearch()
+            {
+                nombre = nombre,
+                libreria = libreria,
+                tema = tema,
+                precioMin = precioMin,
+                precioMax = precioMax,
+                filtros = filtros
+            };
+
+            string requestype = "book/";
+            string json = JsonConvert.SerializeObject(libros);
+
+            this.client.endPoint = this.URL + requestype + json;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            string[] result = jsonResult.resultado;
+            book[] resultado = new book[result.Length];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                dynamic libroJson = JsonConvert.DeserializeObject(result[i]);
+
+                book temp = new book()
+                {
+                    issn = libroJson.issn,
+                    nombre = libroJson.nombre,
+                    tema = libroJson.tema,
+                    descripcion = libroJson.descripcion,
+                    libreria = libroJson.libreria,
+                    cantidadVendida = libroJson.cantidadVendida,
+                    cantidadDisponible = libroJson.cantidadDisponible,
+                    foto = libroJson.foto,
+                    precioDolares = libroJson.precioDolares
+
+                };
+
+                resultado[i] = temp;
+            }
+
+            return resultado;
+        }
+
+        public book[] GetBooks()
+        {
+            bookSearch libros = new bookSearch()
+            {
+                nombre = string.Empty,
+                libreria = string.Empty,
+                tema = string.Empty,
+                precioMin = 0,
+                precioMax = 0,
+                filtros = new string[0]
+            };
+
+            string requestype = "book/";
+            string json = JsonConvert.SerializeObject(libros);
+
+            this.client.endPoint = this.URL + requestype + json;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            JArray result = jsonResult.resultado;
+            book[] resultado = new book[result.Count];
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                dynamic libroJson = result.ElementAt(i);
+
+                book temp = new book()
+                {
+                    issn = libroJson.issn,
+                    nombre = libroJson.nombre,
+                    tema = libroJson.tema,
+                    descripcion = libroJson.descripcion,
+                    libreria = libroJson.libreria,
+                    cantidadVendida = libroJson.cantidadVendida,
+                    cantidadDisponible = libroJson.cantidadDisponible,
+                    foto = libroJson.foto,
+                    precioDolares = libroJson.precioDolares
+
+                };
+
+                resultado[i] = temp;
+            }
+
+            return resultado;
         }
 
 
