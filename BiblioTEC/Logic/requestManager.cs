@@ -83,7 +83,7 @@ namespace BiblioTEC.Logic
 
         }
 
-        public string crearCuenta(string nombre, string primerApellido, string segundoApellido, int cedula, string fechaNacimiento, string tipoUsuario, string ubicacion, string correoElectronico, string nombreUsuario, string password, string[] telefonos)
+        public string crearCuenta(string nombre, string primerApellido, string segundoApellido, int cedula, string fechaNacimiento, string tipoUsuario, string ubicacion, string correoElectronico, string nombreUsuario, string password, string[] telefonos, int rType)
         {
 
            
@@ -108,7 +108,7 @@ namespace BiblioTEC.Logic
 
             this.client.endPoint = this.URL + requestype + json;
             //string result = this.client.endPoint;
-            string getrequest = client.makeRequest(2);
+            string getrequest = client.makeRequest(rType);
             getrequest = getrequest.Replace("\"", "'");
             dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
 

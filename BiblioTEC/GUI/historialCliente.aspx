@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="main.aspx.cs" Inherits="BiblioTEC.GUI.main" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="historialCliente.aspx.cs" Inherits="BiblioTEC.GUI.historialCliente" %>
 
 <!DOCTYPE html>
 
@@ -17,8 +17,8 @@
 
 <body>
     <!--Linea Azul arriba de la pagina-->
-    <form id="form1" runat="server">
-        <nav class="navbar navbar-dark" style="background-color: #0b4980;">
+     <form id="form1" runat="server">
+    <nav class="navbar navbar-dark" style="background-color: #0b4980;">
             <a class="navbar-brand" href="main.aspx">BiblioTEC</a>
          
             <div class=" navbar-expand-lg" style="margin-left:25px; margin-right:25px">
@@ -33,7 +33,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="#" onserverclick="editarInfo" runat="server">Editar mi Informacion</a>
-                              <a class="dropdown-item" href="#" onserverclick="verHistorial" runat="server">Ver Historial de compras</a>
+                              <a class="dropdown-item" href="#">Ver Historial de compras</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" onserverclick="logOut" runat="server">Cerrar Sesion</a>
                             </div>
@@ -53,30 +53,26 @@
                   
         </nav>
 
-        <div class="container-fluid" style="margin-bottom: 75px">
+        <div class="container-fluid" style="margin-top: 75px">
 
             <!-- Creo una fila -->
             <section class="main row row-centered">
 
-                <!-- filtros -->
+                <!-- spacer -->
+                <!-- spacer -->
                <div class="col-lg-3" style="background-color:lightgray">
                   <div class="row" style="margin-top:10px">
-                              <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar un libro" style="margin:10px; float:left; width:350px"></asp:TextBox>
+                          <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar un libro" style="margin:10px; float:left; width:350px"></asp:TextBox>
                           <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnBuscar_Click"></asp:Button> 
                           </div>
 
-                   <div class="row" style ="margin:25px">
-                       <asp:DropDownList ID="DDList_Idiomas" runat="server" CssClass="form-control"></asp:DropDownList>
-                   </div>
-
-                   <p class="card-text" id="resultadoTranslate" runat="server">resultado</p>
 
                    <div class="row">
                        <div class="col">
                            <h3> Filtros </h3>
-                           <asp:CheckBox id="checkLibreria" runat="server"
+                           <asp:CheckBox id="checkEstado" runat="server"
                                 AutoPostBack="False"
-                                Text="Libreria"
+                                Text="Estado del Pedido"
                                 TextAlign="Right"
                                 CssClass="form-check"
                             />
@@ -88,43 +84,37 @@
                                 CssClass="form-check"
                             />
 
-                           <asp:CheckBox id="checkPrecio" runat="server"
+                           <asp:CheckBox id="checkFecha" runat="server"
                                 AutoPostBack="False"
-                                Text="Precio"
+                                Text="Rango de fechas"
                                 TextAlign="Right"
                              
                                 CssClass="form-check"
                             />
 
-                           <asp:CheckBox id="checkNombre" runat="server"
-                                AutoPostBack="False"
-                                Text="nombre"
-                                TextAlign="Right"
-                            
-                                CssClass="form-check"
-                            />
                        </div>
                    </div>
 
                    <div class="row">
-                       <h3> Rango de Precios</h3>
+                       <h3> Rango de Fechas</h3>
                    </div>
 
                    <div class="row">
-                       <h5>Desde $</h5> <asp:TextBox ID="txtPrecioMin" runat="server" CssClass="form-control" style=" float:left; width:100px; margin-right:50px"></asp:TextBox>
-                       <h5 style="margin-left:50px">Hasta $</h5> <asp:TextBox ID="txtPrecioMax" runat="server" CssClass="form-control" style=" float:left; width:100px"></asp:TextBox>
+                       <h5>Desde</h5> <asp:TextBox ID="txtPrecioMin" runat="server" CssClass="form-control" style=" float:left; width:100px; margin-right:50px"></asp:TextBox>
+                       <h5 style="margin-left:50px">Hasta</h5> <asp:TextBox ID="txtPrecioMax" runat="server" CssClass="form-control" style=" float:left; width:100px"></asp:TextBox>
                    </div>
                </div>
 
-                <!-- Lista Libros -->
-                <div class="col-sm-12 col-md-12 col-lg-4 col-centered" id="columnaPrueba" runat="server" style="margin-top: 75px; margin-left:90px">
-                    <div class="list-group" id="bookList" runat="server"></div>
+                <!-- Cuadro Login -->
+                <div class="col-sm-12 col-md-12 col-lg-4 col-centered">
+                    <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+                        <!-- Enmarca el Login -->
+                        <div class="card-body text-center">
+                            <h5 class="card-title" style="margin: 25px">MAIN</h5>
+                            <div></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-4 col-centered" id="Div1" runat="server" style="margin-top: 75px">
-                    <div class="list-group" id="bookList2" runat="server"></div>
-                </div>
-                
-
             </section>
         </div>
     </form>

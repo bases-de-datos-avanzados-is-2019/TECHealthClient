@@ -202,6 +202,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="GUI\bookInfo.aspx" />
     <Content Include="GUI\crearCuenta.aspx" />
+    <Content Include="GUI\historialCliente.aspx" />
     <Content Include="GUI\login.aspx" />
     <Content Include="GUI\main.aspx" />
     <Content Include="GUI\plantilla.aspx" />
@@ -279,6 +280,13 @@
     </Compile>
     <Compile Include="GUI\crearCuenta.aspx.designer.cs">
       <DependentUpon>crearCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\historialCliente.aspx.cs">
+      <DependentUpon>historialCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\historialCliente.aspx.designer.cs">
+      <DependentUpon>historialCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="GUI\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

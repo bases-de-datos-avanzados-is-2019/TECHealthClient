@@ -34,7 +34,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="#" onserverclick="editarInfo" runat="server">Editar mi Informacion</a>
-                              <a class="dropdown-item" href="#">Ver Historial de compras</a>
+                              <a class="dropdown-item" href="#"onserverclick="verHistorial" runat="server">Ver Historial de compras</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" onserverclick="logOut" runat="server">Cerrar Sesion</a>
                             </div>

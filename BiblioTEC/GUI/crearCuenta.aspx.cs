@@ -82,59 +82,107 @@ namespace BiblioTEC.GUI
          */
         protected void btnCrearCuenta_Click(object seder, EventArgs e)
         {
-            try
+            
+            if (this.isEdit)
             {
-
-                string nombre = txtNombre.Text;
-                string primerApellido = txtApellido1.Text;
-                string segundoApellido = txtApellido2.Text;
-                int cedula = Int32.Parse(txtCedula.Text);
-                string fecha = txtFechaNacimiento.Text;
-                string tipoCliente = DDList_tipoCliente.SelectedItem.Text;
-                string ubicacion = DDList_ubicacion.SelectedItem.Text;
-                string correo = txtCorreo.Text;
-                string nombreUsuario = txtUsuario.Text;
-                string contra = txtConstrasena.Text;
-                string contra2 = txtContrasenaConfirmacion.Text;
-
-                string telefonosTemp = txtTelefono.Text;
-                telefonosTemp = telefonosTemp.Replace(" ", String.Empty);
-                string[] telefonos = telefonosTemp.Split(',');
-
-          
-
-                if (contra.Equals(contra2))
+                try
                 {
-                    requestManager request = new requestManager();
-                    string result =  request.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos);
 
-                    if(result == "aceptado")
+                    string nombre = txtNombre.Text;
+                    string primerApellido = txtApellido1.Text;
+                    string segundoApellido = txtApellido2.Text;
+                    int cedula = Int32.Parse(txtCedula.Text);
+                    string fecha = txtFechaNacimiento.Text;
+                    string tipoCliente = DDList_tipoCliente.SelectedItem.Text;
+                    string ubicacion = DDList_ubicacion.SelectedItem.Text;
+                    string correo = txtCorreo.Text;
+                    string nombreUsuario = txtUsuario.Text;
+                    string contra = txtConstrasena.Text;
+                    string contra2 = txtContrasenaConfirmacion.Text;
+
+                    string telefonosTemp = txtTelefono.Text;
+                    telefonosTemp = telefonosTemp.Replace(" ", String.Empty);
+                    string[] telefonos = telefonosTemp.Split(',');
+
+
+
+                    if (contra.Equals(contra2))
                     {
-                        Response.Redirect("~/GUI/login.aspx");
+                        requestManager request = new requestManager();
+                        string result = request.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos, 3);
+
+                        if (result == "aceptado")
+                        {
+                            Response.Redirect("~/GUI/login.aspx");
+                        }
+                        else
+                        {
+                            showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                            //showAlert(result);
+                        }
                     }
                     else
                     {
-                         showAlert("Ha ocurrido un error a la hora de registrar su usuario");
-                        //showAlert(result);
+                        showAlert("Las contrasenas ingresadas no coinciden. Intentalo nuevamente!");
                     }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    showAlert("Las contrasenas ingresadas no coinciden. Intentalo nuevamente!");
+                    showAlert(ex.Message + " " + ex.Source + "" + ex.StackTrace);
+
                 }
-
-            } catch (Exception ex)
-            {
-                showAlert(ex.Message +" " +  ex.Source + "" + ex.StackTrace);
-               
-            }
-
-            if (this.isEdit)
-            {
 
             }
             else
             {
+                try
+                {
+
+                    string nombre = txtNombre.Text;
+                    string primerApellido = txtApellido1.Text;
+                    string segundoApellido = txtApellido2.Text;
+                    int cedula = Int32.Parse(txtCedula.Text);
+                    string fecha = txtFechaNacimiento.Text;
+                    string tipoCliente = DDList_tipoCliente.SelectedItem.Text;
+                    string ubicacion = DDList_ubicacion.SelectedItem.Text;
+                    string correo = txtCorreo.Text;
+                    string nombreUsuario = txtUsuario.Text;
+                    string contra = txtConstrasena.Text;
+                    string contra2 = txtContrasenaConfirmacion.Text;
+
+                    string telefonosTemp = txtTelefono.Text;
+                    telefonosTemp = telefonosTemp.Replace(" ", String.Empty);
+                    string[] telefonos = telefonosTemp.Split(',');
+
+
+
+                    if (contra.Equals(contra2))
+                    {
+                        requestManager request = new requestManager();
+                        string result = request.crearCuenta(nombre, primerApellido, segundoApellido, cedula, fecha, "cliente", ubicacion, correo, nombreUsuario, contra, telefonos, 2);
+
+                        if (result == "aceptado")
+                        {
+                            Response.Redirect("~/GUI/login.aspx");
+                        }
+                        else
+                        {
+                            showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                            //showAlert(result);
+                        }
+                    }
+                    else
+                    {
+                        showAlert("Las contrasenas ingresadas no coinciden. Intentalo nuevamente!");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    showAlert(ex.Message + " " + ex.Source + "" + ex.StackTrace);
+
+                }
 
             }
             

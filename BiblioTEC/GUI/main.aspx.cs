@@ -184,5 +184,23 @@ namespace BiblioTEC.GUI
 
             }
         }
+
+        protected void logOut(object sender, EventArgs e)
+        {
+
+            Response.Redirect("~/GUI/login.aspx");
+        }
+
+        protected void editarInfo(object sender, EventArgs e)
+        {
+
+            Response.Redirect("~/GUI/crearCuenta.aspx/" + this.user);
+        }
+
+        protected void verHistorial(object sender, EventArgs e)
+        {
+
+            Response.Redirect("~/GUI/historialCliente.aspx/" + this.user);
+        }
     }
 }
