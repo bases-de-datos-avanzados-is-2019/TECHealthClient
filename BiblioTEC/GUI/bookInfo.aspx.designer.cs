@@ -76,6 +76,15 @@ namespace BiblioTEC.GUI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl bookDescription;
         
         /// <summary>
+        /// bookPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bookPhoto;
+        
+        /// <summary>
         /// btnComprar control.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,23 @@ namespace BiblioTEC.GUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnComprar;
+        
+        /// <summary>
+        /// bookCopiasV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bookCopiasV;
+        
+        /// <summary>
+        /// bookCopiasD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bookCopiasD;
     }
 }

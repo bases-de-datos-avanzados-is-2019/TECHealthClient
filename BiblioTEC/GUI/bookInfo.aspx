@@ -34,7 +34,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="#" onserverclick="editarInfo" runat="server">Editar mi Informacion</a>
-                              <a class="dropdown-item" href="#"onserverclick="verHistorial" runat="server">Ver Historial de compras</a>
+                              <a class="dropdown-item" href="#" runat="server">Ver Historial de compras</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" onserverclick="logOut" runat="server">Cerrar Sesion</a>
                             </div>
@@ -94,13 +94,13 @@
                </div>
 
                 <div class="col-lg-2">
-                    <image src ="http://i.imgur.com/ozxH9ZY.png"  width="350px" height="500px" allign-right="true"></image>
+                    <image src ="http://i.imgur.com/ozxH9ZY.png"  width="350px" height="500px" allign-right="true" id="bookPhoto" runat="server"></image>
 
                     <div class="row" style="margin:10px">
                            <div class="col-6">
                            </div>
                            <div class="col-2">
-                               <asp:Button ID="btnComprar" runat="server" CssClass="btn btn-primary" Text="AGREGAR AL CARRITO" UseSubmitBehavior="false"></asp:Button> 
+                               <asp:Button ID="btnComprar" runat="server" CssClass="btn btn-primary" Text="AGREGAR AL CARRITO" UseSubmitBehavior="false" OnClick="btn_AddToCart"></asp:Button> 
                            </div>
                        </div>
                 </div>
@@ -110,7 +110,7 @@
                     <div class="card border-info" style="max-width: 20rem; margin-bottom: 20px; margin-left:250px">
                         <!-- Enmarca el Login -->
                         <div class="card-body text-center">
-                            <h5 class="card-title" style="margin: 25px">MAIN</h5>
+                            <h5 class="card-title" style="margin: 25px" id="bookCopiasV" runat="server">COPIAS VENDIDAS</h5>
                             <div></div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                     <div class="card border-info" style="max-width: 20rem; margin-bottom: 20px; margin-left:250px">
                         <!-- Enmarca el Login -->
                         <div class="card-body text-center">
-                            <h5 class="card-title" style="margin: 25px">MAIN</h5>
+                            <h5 class="card-title" style="margin: 25px" id="bookCopiasD" runat="server">COPIAS DISPONIBLES</h5>
                             <div></div>
                         </div>
                     </div>

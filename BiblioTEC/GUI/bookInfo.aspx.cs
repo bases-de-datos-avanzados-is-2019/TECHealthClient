@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BiblioTEC.Logic;
 using BiblioTEC.Objects;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Google.Cloud.Translation.V2;
+using Google.Apis.Auth.OAuth2;
 
 namespace BiblioTEC.GUI
 {
@@ -13,6 +17,7 @@ namespace BiblioTEC.GUI
     {
         private string bookId;
         private string user;
+        private book myBook;
         private Image sample = new Image();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,16 +65,55 @@ namespace BiblioTEC.GUI
             string titulo = libros[0].nombre;
             int precio = libros[0].precioDolares;
 
+            this.myBook = libros[0];
+
             int id = libros[0].issn;
             string tema = libros[0].tema;
 
             string descripcion = libros[0].descripcion;
+
+            string imgSrc = libros[0].foto;
+
+            int copiasV = libros[0].cantidadVendida;
+            int copiasD = libros[0].cantidadDisponible;
 
             bookTitle.InnerText = titulo;
             bookPrice.InnerText = "$" + precio.ToString();
             bookIssn.InnerText = id.ToString();
             bookTheme.InnerText = tema;
             bookDescription.InnerText = descripcion;
+            bookPhoto.Attributes.Remove("src");
+            bookCopiasD.InnerText = "Cantidad de libros disponibles: " + copiasD.ToString();
+            bookCopiasV.InnerText = "Cantidad de libros vendidos: " + copiasV.ToString();
+            bookPhoto.Attributes.Add("src", imgSrc);
+        }
+
+        protected void btn_AddToCart (object sender, EventArgs e)
+        {
+            addToCart();
+            translate("hello", "ru");
+            //Response.Redirect("~/GUI/main.aspx/" + this.user);
+
+        }
+
+        protected void addToCart ()
+        {
+            string libros = Application["LibrosOrden"].ToString();
+            libros = libros + "," + this.myBook.issn;
+            
+            Application["LibrosOrden"] = libros;
+            
+        }
+
+        protected string translate (string text,string language)
+        {
+            var credential = GoogleCredential.FromFile("D:/TEC/Projects/BiblioTEC/GoogleCredentials.json");
+
+
+            TranslationClient client = TranslationClient.Create(credential);
+            var response = client.TranslateText(text, language);
+
+            return response.ToString();
         }
     }
 }

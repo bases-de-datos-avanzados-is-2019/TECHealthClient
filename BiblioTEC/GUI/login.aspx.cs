@@ -44,7 +44,8 @@ namespace BiblioTEC.GUI
              switch (result[1])
              {
                  case "cliente":
-                     Response.Redirect("~/GUI/main.aspx/" + result[0]);
+                    Application["LibrosOrden"] = "libros";
+                    Response.Redirect("~/GUI/main.aspx/" + result[0]);
                      break;
 
                  case "agente":
@@ -52,8 +53,8 @@ namespace BiblioTEC.GUI
 
                      break;
 
-                 case "administrador":
-                     //Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
+                 case "administradr":
+                     Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
                      break;
 
                  default:

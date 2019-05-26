@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BiblioTEC.Logic;
+using BiblioTEC.Objects;
 
 namespace BiblioTEC.GUI
 {
@@ -51,16 +52,38 @@ namespace BiblioTEC.GUI
 
                 errorAlert.Visible = false;
 
-              string path = HttpContext.Current.Request.Url.AbsolutePath;
+                string path = HttpContext.Current.Request.Url.AbsolutePath;
                 path = path.Replace("/", ",");
                 string[] elements = path.Split(',');
                 
                 this.user = elements[elements.Length - 1];
+                
 
                 if (user != "crearCuenta")
                 {
                     this.isEdit = true;
                     btnCrearCuenta.Text = "GUARDAR CAMBIOS";
+
+                    //string handler = Request.QueryString["usID"];
+
+                    requestManager request = new requestManager();
+                    string handler = Application["USER"].ToString();
+
+                    dynamic current = request.getClient(handler);
+                  
+                    
+                    txtNombre.Text = current.nombre;
+                    txtApellido1.Text = current.primerApellido;
+                    txtApellido2.Text = current.segundoApellido;
+                    txtCedula.Text = current.cedula.ToString();
+                    txtFechaNacimiento.Text = current.fechaNacimiento;
+                    DDList_ubicacion.SelectedItem.Text = current.ubicacion;
+                    txtCorreo.Text = current.correoElectronico;
+                    txtUsuario.Text = current.nombreUsuario;
+                    //txtConstrasena.Text = current.password;
+                    //txtContrasenaConfirmacion.Text = current.password;
+                    txtTelefono.Text = string.Join(",", current.telefonos);
+                    showAlert("Recuerde que debe de volver a ingresar su contrasena");
                 }
 
 
@@ -82,8 +105,13 @@ namespace BiblioTEC.GUI
          */
         protected void btnCrearCuenta_Click(object seder, EventArgs e)
         {
-            
-            if (this.isEdit)
+            string path = HttpContext.Current.Request.Url.AbsolutePath;
+            path = path.Replace("/", ",");
+            string[] elements = path.Split(',');
+
+            this.user = elements[elements.Length - 1];
+
+            if (user != "crearCuenta")
             {
                 try
                 {
@@ -117,8 +145,8 @@ namespace BiblioTEC.GUI
                         }
                         else
                         {
-                            showAlert("Ha ocurrido un error a la hora de registrar su usuario");
-                            //showAlert(result);
+                            //showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                            showAlert(result);
                         }
                     }
                     else
@@ -168,7 +196,7 @@ namespace BiblioTEC.GUI
                         }
                         else
                         {
-                            showAlert("Ha ocurrido un error a la hora de registrar su usuario");
+                            showAlert("oops no estas programando bien");
                             //showAlert(result);
                         }
                     }

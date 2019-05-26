@@ -9,12 +9,15 @@ using Google.Cloud.Translation.V2;
 using Google.Apis.Auth.OAuth2;
 using BiblioTEC.Objects;
 using BiblioTEC.Logic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BiblioTEC.GUI
 {
     public partial class main : System.Web.UI.Page
     {
         private string user;
+        private string handle;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -30,6 +33,12 @@ namespace BiblioTEC.GUI
                 requestManager request = new requestManager();
                 book[] libros = request.GetBooks();
                 getBooks(libros);
+                txtBuscar.Text = Application["LibrosOrden"].ToString();
+                Application["USER"] = this.user;
+                
+                
+
+                
                 
 
             }
@@ -38,7 +47,7 @@ namespace BiblioTEC.GUI
 
         protected void btnCarrito_Click (object sender, EventArgs e)
         {
-            Response.Redirect("~/GUI/crearCuenta.aspx");
+            Response.Redirect("~/GUI/carritoCliente.aspx" + this.user);
         }
 
         protected HtmlGenericControl NuevoLibro (string nombre, string tema, string precio, string id)
@@ -162,7 +171,7 @@ namespace BiblioTEC.GUI
 
             txtPrecioMax.Text = "" + midway;
             txtPrecioMin.Text = "" + remainder;
-            txtBuscar.Text = "" + lengh;
+            //txtBuscar.Text = "" + lengh;
 
 
 
@@ -193,7 +202,7 @@ namespace BiblioTEC.GUI
 
         protected void editarInfo(object sender, EventArgs e)
         {
-
+            
             Response.Redirect("~/GUI/crearCuenta.aspx/" + this.user);
         }
 

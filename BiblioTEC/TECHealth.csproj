@@ -201,10 +201,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="GUI\bookInfo.aspx" />
+    <Content Include="GUI\carritoCliente.aspx" />
     <Content Include="GUI\crearCuenta.aspx" />
     <Content Include="GUI\historialCliente.aspx" />
     <Content Include="GUI\login.aspx" />
     <Content Include="GUI\main.aspx" />
+    <Content Include="GUI\mainAdmin.aspx" />
     <Content Include="GUI\plantilla.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -274,6 +276,13 @@
     <Compile Include="GUI\bookInfo.aspx.designer.cs">
       <DependentUpon>bookInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GUI\carritoCliente.aspx.cs">
+      <DependentUpon>carritoCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\carritoCliente.aspx.designer.cs">
+      <DependentUpon>carritoCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\crearCuenta.aspx.cs">
       <DependentUpon>crearCuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -302,6 +311,13 @@
     <Compile Include="GUI\main.aspx.designer.cs">
       <DependentUpon>main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GUI\mainAdmin.aspx.cs">
+      <DependentUpon>mainAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\mainAdmin.aspx.designer.cs">
+      <DependentUpon>mainAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\plantilla.aspx.cs">
       <DependentUpon>plantilla.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,9 +328,14 @@
     <Compile Include="Logic\requestManager.cs" />
     <Compile Include="Logic\restClient.cs" />
     <Compile Include="Objects\book.cs" />
+    <Compile Include="Objects\book2.cs" />
     <Compile Include="Objects\bookSearch.cs" />
     <Compile Include="Objects\bookStore.cs" />
+    <Compile Include="Objects\bookStore2.cs" />
     <Compile Include="Objects\logIn.cs" />
+    <Compile Include="Objects\orden.cs" />
+    <Compile Include="Objects\rUser.cs" />
+    <Compile Include="Objects\sale.cs" />
     <Compile Include="Objects\user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

@@ -32,15 +32,15 @@
                               Perfil
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#" onserverclick="editarInfo" runat="server">Editar mi Informacion</a>
-                              <a class="dropdown-item" href="#" onserverclick="verHistorial" runat="server">Ver Historial de compras</a>
+                              <a class="dropdown-item" onserverclick="editarInfo" runat="server">Editar mi Informacion</a>
+                              <a class="dropdown-item" onserverclick="verHistorial" runat="server">Ver Historial de compras</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" onserverclick="logOut" runat="server">Cerrar Sesion</a>
                             </div>
                           </li>
 
                           </li class="nav-item active">
-                            <a href="#" style="color:white; margin:12px" id="btnCarrito" runat="server" ><i class="fa fa-fw fa-shopping-cart" style="color:white"></i> Carrito</a>
+                            <a href="#" style="color:white; margin:12px" id="btnCarrito" runat="server" onserverclick="btnCarrito_Click"><i class="fa fa-fw fa-shopping-cart" style="color:white"></i> Carrito</a>
                           </li>
 
 
@@ -59,7 +59,7 @@
             <section class="main row row-centered">
 
                 <!-- filtros -->
-               <div class="col-lg-3" style="background-color:lightgray">
+               <div class="col-lg-3" style="background-color:lightgray; height:1000px" >
                   <div class="row" style="margin-top:10px">
                               <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar un libro" style="margin:10px; float:left; width:350px"></asp:TextBox>
                           <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnBuscar_Click"></asp:Button> 
