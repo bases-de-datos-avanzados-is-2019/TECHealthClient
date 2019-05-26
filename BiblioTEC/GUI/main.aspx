@@ -65,8 +65,8 @@
                           <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnBuscar_Click"></asp:Button> 
                           </div>
 
-                   <div class="row" style ="margin:25px">
-                       <asp:DropDownList ID="DDList_Idiomas" runat="server" CssClass="form-control"></asp:DropDownList>
+                   <div class="row" style ="margin-top:10px">
+                       <asp:DropDownList ID="DDList_tema" runat="server" CssClass="form-control" style="margin:10px; float:left; width:350px"></asp:DropDownList>
                    </div>
 
                    <p class="card-text" id="resultadoTranslate" runat="server">resultado</p>

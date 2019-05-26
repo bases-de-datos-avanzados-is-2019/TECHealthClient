@@ -35,11 +35,29 @@ namespace BiblioTEC.GUI
                 getBooks(libros);
                 txtBuscar.Text = Application["LibrosOrden"].ToString();
                 Application["USER"] = this.user;
-                
-                
 
-                
-                
+                ListItem p1 = new ListItem("Ingenieria", "1");
+                ListItem p2 = new ListItem("Administracion", "2");
+                ListItem p3 = new ListItem("Ciencias Naturales", "3");
+                ListItem p4 = new ListItem("Artes", "4");
+                ListItem p5 = new ListItem("Historia", "5");
+                ListItem p6 = new ListItem("Matematicas", "6");
+                ListItem p7 = new ListItem("Realidad", "7");
+
+                DDList_tema.Items.Add(p1);
+                DDList_tema.Items.Add(p2);
+                DDList_tema.Items.Add(p3);
+                DDList_tema.Items.Add(p4);
+                DDList_tema.Items.Add(p5);
+                DDList_tema.Items.Add(p6);
+                DDList_tema.Items.Add(p7);
+
+                DDList_tema.DataBind();
+
+
+
+
+
 
             }
             
@@ -101,6 +119,7 @@ namespace BiblioTEC.GUI
              resultadoTranslate.InnerText = response.ToString();*/
          
             string busqueda = txtBuscar.Text;
+            string tema = DDList_tema.SelectedItem.Text;
             int precioMx = Int32.Parse( txtPrecioMax.Text);
             int precioMn = Int32.Parse(txtPrecioMin.Text);
             bool libreBool = checkLibreria.Checked;
@@ -138,7 +157,7 @@ namespace BiblioTEC.GUI
             myBook.filtros = filtro;
 
             requestManager request = new requestManager();
-            book[] lista = request.GetBooks(busqueda, busqueda, busqueda, precioMn, precioMx, filtro);
+            book[] lista = request.GetBooks(busqueda,busqueda,tema,precioMn,precioMx,filtro);
             //txtBuscar.Text = lista;
 
             

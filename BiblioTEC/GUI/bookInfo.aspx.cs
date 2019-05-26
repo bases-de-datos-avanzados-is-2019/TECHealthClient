@@ -82,10 +82,18 @@ namespace BiblioTEC.GUI
             bookIssn.InnerText = id.ToString();
             bookTheme.InnerText = tema;
             bookDescription.InnerText = descripcion;
-            bookPhoto.Attributes.Remove("src");
+            
             bookCopiasD.InnerText = "Cantidad de libros disponibles: " + copiasD.ToString();
             bookCopiasV.InnerText = "Cantidad de libros vendidos: " + copiasV.ToString();
-            bookPhoto.Attributes.Add("src", imgSrc);
+
+            try
+            {
+                bookPhoto.Attributes.Remove("src");
+                bookPhoto.Attributes.Add("src", imgSrc);
+            } catch (Exception e)
+            {
+                // something
+            }
         }
 
         protected void btn_AddToCart (object sender, EventArgs e)

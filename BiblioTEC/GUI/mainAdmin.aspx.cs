@@ -37,7 +37,7 @@ namespace BiblioTEC.GUI
                 errorAlert.Visible = false;
                 populatePromotions();
                 populateBooks();
-                //populateBookStores();
+                populateBookStores();
                 
             }
         
@@ -57,6 +57,8 @@ namespace BiblioTEC.GUI
                 int cantidadD = Int32.Parse(txtCantidadDisponible.Text);
                 int precio = Int32.Parse(txtPrecio.Text);
 
+                foto = foto.Replace("/","%2F");
+
                 requestManager request = new requestManager();
                 string resultado = request.insertBook(titulo, libreria, tema, descripcion, foto, cantidadV, cantidadD, precio);
 
@@ -74,6 +76,8 @@ namespace BiblioTEC.GUI
                     txtCantidadDisponible.Text = string.Empty;
                     txtCantidadVendida.Text = string.Empty;
                     txtPrecio.Text = string.Empty;
+                    DDList_DeleteLibro.Items.Clear();
+                    populateBooks();
                 }
             } catch (Exception ex)
             {
@@ -104,6 +108,8 @@ namespace BiblioTEC.GUI
                 txtTelefonoLibreria.Text = string.Empty;
                 txtHorarioLibreria.Text = string.Empty;
                 txtDetalleLibreria.Text = string.Empty;
+                DDList_DeleteLibreria.Items.Clear();
+                populateBookStores();
             }
         }
 
@@ -135,6 +141,8 @@ namespace BiblioTEC.GUI
                     txtPromocionNombre.Text = string.Empty;
                     txtPromocionFInicio.Text = string.Empty;
                     txtPromocionFFinal.Text = string.Empty;
+                    DDList_DeletePromocion.Items.Clear();
+                    populatePromotions();
                 }
             } catch (Exception ex)
             {
@@ -190,10 +198,11 @@ namespace BiblioTEC.GUI
 
         protected void populateBookStores()
         {
+            
             requestManager request = new requestManager();
             string[,] bookStores = request.getAllBookStores();
 
-            for (int i = 0; i < bookStores.Length; i++)
+            for (int i = 0; i < bookStores.GetLength(0); i++)
             {
                 ListItem p = new ListItem(bookStores[i,0], bookStores[i,1]);
                 DDList_DeleteLibreria.Items.Add(p);
@@ -233,8 +242,28 @@ namespace BiblioTEC.GUI
             {
                 DDList_DeletePromocion.Items.Clear();
                 populatePromotions();
+                
             }
             
+        }
+
+        protected void btnEliminarLibreria_Click(object sender, EventArgs e)
+        {
+            string bookID = DDList_DeleteLibreria.SelectedValue.ToString();
+            int issn = Int32.Parse(bookID);
+            requestManager request = new requestManager();
+            string result = request.deleteBookStore(issn);
+
+            if (result != "Libreria eliminada")
+            {
+                showAlert("Error a la hora de eliminar la libreria");
+            }
+            else
+            {
+                DDList_DeleteLibreria.Items.Clear();
+                populateBookStores();
+            }
+
         }
 
     }

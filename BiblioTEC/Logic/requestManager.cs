@@ -246,24 +246,6 @@ namespace BiblioTEC.Logic
           
             dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
 
-
-            /*user result = new user()
-            {
-                nombre = jsonResult.nombre,
-                primerApellido = jsonResult.primerApellido,
-                segundoApellido = jsonResult.segundoApellido,
-                cedula = Int32.Parse(jsonResult.cedula),
-                nombreUsuario = jsonResult.nombreUsuario,
-                fechaNacimiento =jsonResult.fechaNacimiento,
-                correoElectronico = jsonResult.correoElectronico,
-                ubicacion = jsonResult.ubicacion,
-                password = jsonResult.password,
-                tipoUsuario = jsonResult.tipoUsuario,
-                telefonos = jsonResult.telefonos
-
-
-            };*/
-
             return jsonResult;
         }
 
@@ -517,6 +499,18 @@ namespace BiblioTEC.Logic
             string result = jsonResult.mensaje;
             return result;
 
+        }
+
+        public string deleteBookStore(int codigo) 
+        {
+            string requestype = "bookStore/" + codigo;
+            this.client.endPoint = this.URL + requestype;
+            string getrequest = client.makeRequest(4);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            string result = jsonResult.mensaje;
+            return result;
         }
 
 

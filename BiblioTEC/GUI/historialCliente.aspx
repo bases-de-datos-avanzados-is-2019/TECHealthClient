@@ -65,6 +65,9 @@
                           <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar un libro" style="margin:10px; float:left; width:350px"></asp:TextBox>
                           <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnBuscar_Click"></asp:Button> 
                           </div>
+                   <div class="row" style ="margin-top:10px">
+                       <asp:DropDownList ID="DDList_tema" runat="server" CssClass="form-control" style="margin:10px; float:left; width:350px"></asp:DropDownList>
+                   </div>
 
 
                    <div class="row">

@@ -298,7 +298,7 @@
                                         </div>
                                     <div class="row">
                                         <div class="col text-center">
-                                            <asp:Button ID="Button3" runat="server" CssClass="btn btn-primary" Style="margin-top: 50px" Text="ELIMINAR" UseSubmitBehavior="false" OnClick="btnPromociones_Click"></asp:Button> 
+                                            <asp:Button ID="Button3" runat="server" CssClass="btn btn-primary" Style="margin-top: 50px" Text="ELIMINAR" UseSubmitBehavior="false" OnClick="btnEliminarLibreria_Click"></asp:Button> 
                                         </div>
                                     </div>
                                 </div>

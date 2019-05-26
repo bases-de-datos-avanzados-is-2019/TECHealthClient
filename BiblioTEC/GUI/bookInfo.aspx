@@ -94,7 +94,7 @@
                </div>
 
                 <div class="col-lg-2">
-                    <image src ="http://i.imgur.com/ozxH9ZY.png"  width="350px" height="500px" allign-right="true" id="bookPhoto" runat="server"></image>
+                    <image src ="http://i.imgur.com/ZthpXva.jpg"  width="350px" height="500px" allign-right="true" id="bookPhoto" runat="server"></image>
 
                     <div class="row" style="margin:10px">
                            <div class="col-6">
