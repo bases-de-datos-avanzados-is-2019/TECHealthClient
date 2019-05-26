@@ -61,8 +61,20 @@ namespace BiblioTEC.Logic
              idUsuario = jsonResult.id;
              tipoUsuario = jsonResult.tipoUsuario;
 
-             // Llenado del array
-             result[0] = idUsuario;
+            if(tipoUsuario == "gerente")
+            {
+                result = new string[3];
+                string libreria = jsonResult.libreria;
+                result[0] = idUsuario;
+                result[1] = tipoUsuario;
+                result[2] = libreria;
+
+                return result;
+
+            }
+
+            // Llenado del array
+            result[0] = idUsuario;
              result[1] = tipoUsuario;
 
             // Resultado de la consulta
@@ -511,6 +523,42 @@ namespace BiblioTEC.Logic
 
             string result = jsonResult.mensaje;
             return result;
+        }
+
+        public JArray getRango()
+        {
+            string requestype = "order/rangos";
+            this.client.endPoint = this.URL + requestype;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            JArray resultado = jsonResult.resultado;
+            return resultado;
+        }
+
+        public JArray getTheme()
+        {
+            string requestype = "theme/temas";
+            this.client.endPoint = this.URL + requestype;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            JArray resultado = jsonResult.resultado;
+            return resultado;
+        }
+
+        public JArray getTopBooks()
+        {
+            string requestype = "book/admin/masComprados";
+            this.client.endPoint = this.URL + requestype;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            JArray resultado = jsonResult.resultado;
+            return resultado;
         }
 
 

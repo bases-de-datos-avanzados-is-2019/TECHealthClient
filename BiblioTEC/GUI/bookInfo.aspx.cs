@@ -99,8 +99,8 @@ namespace BiblioTEC.GUI
         protected void btn_AddToCart (object sender, EventArgs e)
         {
             addToCart();
-            translate("hello", "ru");
-            //Response.Redirect("~/GUI/main.aspx/" + this.user);
+            //translate("hello", "ru");
+            Response.Redirect("~/GUI/main.aspx/" + this.user);
 
         }
 

@@ -63,11 +63,11 @@
                 <!-- filtros -->
                <div class="col-lg-2" style="background-color:lightgray; height:1000px" >
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Libros</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Librerias</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Promociones</a>
-                      <a class="nav-link" id="v-pills-delete-tab" data-toggle="pill" href="#v-pills-delete" role="tab" aria-controls="v-pills-delete" aria-selected="false">Eliminar Elementos</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reportes</a>
+                    <a class="nav-link active" id="vLibros" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" runat="server">Libros</a>
+                    <a class="nav-link" id="vLibreria" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" runat="server">Librerias</a>
+                    <a class="nav-link" id="vPromociones" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" runat="server">Promociones</a>
+                      <a class="nav-link" id="vEliminar" data-toggle="pill" href="#v-pills-delete" role="tab" aria-controls="v-pills-delete" aria-selected="false" runat="server">Eliminar Elementos</a>
+                    <a class="nav-link" id="vReportes" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" runat="server">Reportes</a>
                   </div>
                </div>
 
@@ -76,7 +76,7 @@
                     <div class="list-group" id="bookList" runat="server"></div>
                     <<div class="tab-content" id="v-pills-tabContent">
 
-                        <div class="tab-pane fade show active col-centered" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="tab-pane fade show active col-centered" id="v-pills-home" role="tabpanel" aria-labelledby="vLibros">
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-sm-12 col-md-12 col-lg-8 text-center">
@@ -150,7 +150,7 @@
                            </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="vLibreria">
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-sm-12 col-md-12 col-lg-8 text-center">
@@ -322,7 +322,46 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">reportes</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                            <ul class="nav nav-tabs">
+                              <li class="nav-item">
+                                <a class="nav-link active" runat="server" id="tabClientes" onserverclick="tabListas_Click">Listas</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" runat="server" id="tabPedidos" onserverclick="tabPedidos_Click">Pedidos</a>
+                              </li>
+                            </ul>
+
+                            <div class="row" style="margin-top:10px" id="reportesTab1" runat="server">
+                                <div class="col-sm-12 col-md-12 col-lg-4 col-centered" id="Div1" runat="server">
+                                    <h5 style="margin-top:15px">Rango de pedidos por cliente</h5>
+                                    <div class="list-group" id="rangeList" runat="server"></div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-12 col-lg-4 col-centered  overflow-auto" id="Div2" runat="server" height="1000px">
+                                    <h5 style="margin-top:15px">Rango de pedidos por tema</h5>
+                                    <div class="list-group" id="themeList" runat="server"></div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-12 col-lg-4 col-centered  overflow-auto" id="Div3" runat="server" height="1000px">
+                                    <h5 style="margin-top:15px">Libros Mas Comprados</h5>
+                                    <div class="list-group" id="topBookList" runat="server"></div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top:10px" id="reportesTab2" runat="server">
+                                <div class="col-lg-4 col-centered">
+                                    <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
+                                </div>
+                                <div class="col-lg-6 col-centered">
+                                    <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
+                                </div>
+                                <div class="col-lg-2 col-centered">
+                                    <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
              

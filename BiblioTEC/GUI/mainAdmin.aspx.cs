@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 using BiblioTEC.Logic;
+using Newtonsoft.Json.Linq;
 
 namespace BiblioTEC.GUI
 {
@@ -14,6 +16,8 @@ namespace BiblioTEC.GUI
         {
             if (!IsPostBack)
             {
+
+                reportesTab2.Visible = false;
                 ListItem p1 = new ListItem("Ingenieria", "1");
                 ListItem p2 = new ListItem("Administracion", "2");
                 ListItem p3 = new ListItem("Ciencias Naturales", "3");
@@ -38,7 +42,9 @@ namespace BiblioTEC.GUI
                 populatePromotions();
                 populateBooks();
                 populateBookStores();
-                
+                getRango();
+                getTheme();
+                getTopBooks();
             }
         
 
@@ -263,6 +269,293 @@ namespace BiblioTEC.GUI
                 DDList_DeleteLibreria.Items.Clear();
                 populateBookStores();
             }
+
+        }
+
+        protected void getRango()
+        {
+            rangeList.Controls.Clear();
+            requestManager request = new requestManager();
+            JArray result = request.getRango();
+
+            for(int i = 0; i < result.Count; i++)
+            {
+                dynamic json = result.ElementAt(i);
+                string usuario = json.nombreUsuario;
+                int min = 0;
+                int max = 0;
+
+                try
+                {
+                    min = json.minPedidos;
+                    max = json.maxPedidos;
+                } catch (Exception e)
+                {
+                    min = 0;
+                    max = 0;
+                }
+                
+
+
+                HtmlGenericControl temp = addToRange(usuario, min, max);
+                rangeList.Controls.Add(temp);
+            }
+        }
+
+        protected void getTheme()
+        {
+            themeList.Controls.Clear();
+            requestManager request = new requestManager();
+            JArray result = request.getTheme();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                dynamic json = result.ElementAt(i);
+                string tema = json.tema;
+                int cantidad = 0;
+                int monto = 0;
+
+                try
+                {
+                    cantidad = json.cantidadVendida;
+                    monto = json.montoPromedio;
+                }
+                catch (Exception e)
+                {
+                    cantidad = 0;
+                    monto = 0;
+                }
+
+
+
+                HtmlGenericControl temp = addToTheme(tema, cantidad, monto);
+                themeList.Controls.Add(temp);
+            }
+        }
+
+        protected void getTopBooks()
+        {
+            topBookList.Controls.Clear();
+            requestManager request = new requestManager();
+            JArray result = request.getTopBooks();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                dynamic json = result.ElementAt(i);
+                string nombre = json.nombre;
+                int cantidad = 0;
+                
+
+                try
+                {
+                    cantidad = json.cantidadVendida;
+                    
+                }
+                catch (Exception e)
+                {
+                    cantidad = 0;
+                    
+                }
+
+
+
+                HtmlGenericControl temp = addToTopBooks(nombre, cantidad);
+                topBookList.Controls.Add(temp);
+            }
+        }
+
+        protected HtmlGenericControl addToRange(string usuario, int min, int max)
+        {
+            HtmlGenericControl element = new HtmlGenericControl("a");
+            element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
+            element.Attributes.Add("runat", "server");
+
+            HtmlGenericControl cabecera = new HtmlGenericControl("div");
+            cabecera.Attributes.Add("class", "d-flex justify-content-between");
+
+            HtmlGenericControl nombreLibro = new HtmlGenericControl("h5");
+            nombreLibro.Attributes.Add("class", "mb-1");
+            nombreLibro.InnerText = usuario;
+
+            HtmlGenericControl minQ = new HtmlGenericControl("p");
+            minQ.Attributes.Add("style", "color:blue");
+            minQ.InnerText = "Minima cantidad de libros comprados: " + min;
+
+            HtmlGenericControl maxQ = new HtmlGenericControl("p");
+            maxQ.Attributes.Add("style", "color:blue");
+            maxQ.InnerText = "Maxima cantidad de libros comprados: " + max;
+
+            cabecera.Controls.Add(nombreLibro);
+
+            element.Controls.Add(cabecera);
+            element.Controls.Add(minQ);
+            element.Controls.Add(maxQ);
+
+            return element;
+        }
+
+        protected HtmlGenericControl addToTheme(string tema, int cantidadV, int promedio)
+        {
+            HtmlGenericControl element = new HtmlGenericControl("a");
+            element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
+            element.Attributes.Add("runat", "server");
+
+            HtmlGenericControl cabecera = new HtmlGenericControl("div");
+            cabecera.Attributes.Add("class", "d-flex justify-content-between");
+
+            HtmlGenericControl nombreLibro = new HtmlGenericControl("h5");
+            nombreLibro.Attributes.Add("class", "mb-1");
+            nombreLibro.InnerText = tema;
+
+            HtmlGenericControl minQ = new HtmlGenericControl("p");
+            minQ.Attributes.Add("style", "color:blue");
+            minQ.InnerText = "Cantidad de libros vendidos: " + cantidadV;
+
+            HtmlGenericControl maxQ = new HtmlGenericControl("p");
+            maxQ.Attributes.Add("style", "color:blue");
+            maxQ.InnerText = "Monto Promerio de libros vendidos: $" + promedio;
+
+            cabecera.Controls.Add(nombreLibro);
+
+            element.Controls.Add(cabecera);
+            element.Controls.Add(minQ);
+            element.Controls.Add(maxQ);
+
+            return element;
+        }
+
+        protected HtmlGenericControl addToTopBooks(string nombre, int cantidadV)
+        {
+            HtmlGenericControl element = new HtmlGenericControl("a");
+            element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
+            element.Attributes.Add("runat", "server");
+
+            HtmlGenericControl cabecera = new HtmlGenericControl("div");
+            cabecera.Attributes.Add("class", "d-flex justify-content-between");
+
+            HtmlGenericControl nombreLibro = new HtmlGenericControl("h5");
+            nombreLibro.Attributes.Add("class", "mb-1");
+            nombreLibro.InnerText = nombre;
+
+            HtmlGenericControl minQ = new HtmlGenericControl("p");
+            minQ.Attributes.Add("style", "color:blue");
+            minQ.InnerText = "Cantidad de libros vendidos: " + cantidadV;
+
+            cabecera.Controls.Add(nombreLibro);
+
+            element.Controls.Add(cabecera);
+            element.Controls.Add(minQ);
+            
+
+            return element;
+        }
+
+        protected void tabListas_Click(object sender, EventArgs e)
+        {
+            reportesTab1.Visible = true;
+            reportesTab2.Visible = false;
+
+            tabClientes.Attributes.Remove("class");
+            tabClientes.Attributes.Add("class", "nav-link active");
+
+            tabPedidos.Attributes.Remove("class");
+            tabPedidos.Attributes.Add("class", "nav-link");
+
+        }
+
+        protected void tabPedidos_Click(object sender, EventArgs e)
+        {
+
+            reportesTab1.Visible = false;
+            reportesTab2.Visible = true;
+
+            tabClientes.Attributes.Remove("class");
+            tabClientes.Attributes.Add("class", "nav-link");
+
+            tabPedidos.Attributes.Remove("class");
+            tabPedidos.Attributes.Add("class", "nav-link active");
+
+        }
+
+        protected void tabLibros(object sender, EventArgs e)
+        {
+            vLibros.Attributes.Remove("aria-selected");
+            vLibreria.Attributes.Remove("aria-selected");
+            vPromociones.Attributes.Remove("aria-selected");
+            vEliminar.Attributes.Remove("aria-selected");
+            vReportes.Attributes.Remove("aria-selected");
+
+            vLibros.Attributes.Add("aria-selected", "true");
+            vLibreria.Attributes.Add("aria-selected", "false");
+            vPromociones.Attributes.Add("aria-selected", "false");
+            vEliminar.Attributes.Add("aria-selected", "false");
+            vReportes.Attributes.Add("aria-selected", "false");
+
+        }
+
+        protected void tabLibrerias(object sender, EventArgs e)
+        {
+            vLibros.Attributes.Remove("aria-selected");
+            vLibreria.Attributes.Remove("aria-selected");
+            vPromociones.Attributes.Remove("aria-selected");
+            vEliminar.Attributes.Remove("aria-selected");
+            vReportes.Attributes.Remove("aria-selected");
+
+            vLibros.Attributes.Add("aria-selected", "false");
+            vLibreria.Attributes.Add("aria-selected", "true");
+            vPromociones.Attributes.Add("aria-selected", "false");
+            vEliminar.Attributes.Add("aria-selected", "false");
+            vReportes.Attributes.Add("aria-selected", "false");
+
+        }
+
+        protected void tabPromociones(object sender, EventArgs e)
+        {
+            vLibros.Attributes.Remove("aria-selected");
+            vLibreria.Attributes.Remove("aria-selected");
+            vPromociones.Attributes.Remove("aria-selected");
+            vEliminar.Attributes.Remove("aria-selected");
+            vReportes.Attributes.Remove("aria-selected");
+
+            vLibros.Attributes.Add("aria-selected", "false");
+            vLibreria.Attributes.Add("aria-selected", "false");
+            vPromociones.Attributes.Add("aria-selected", "true");
+            vEliminar.Attributes.Add("aria-selected", "false");
+            vReportes.Attributes.Add("aria-selected", "false");
+
+        }
+
+        protected void tabEliminar(object sender, EventArgs e)
+        {
+            vLibros.Attributes.Remove("aria-selected");
+            vLibreria.Attributes.Remove("aria-selected");
+            vPromociones.Attributes.Remove("aria-selected");
+            vEliminar.Attributes.Remove("aria-selected");
+            vReportes.Attributes.Remove("aria-selected");
+
+            vLibros.Attributes.Add("aria-selected", "false");
+            vLibreria.Attributes.Add("aria-selected", "false");
+            vPromociones.Attributes.Add("aria-selected", "false");
+            vEliminar.Attributes.Add("aria-selected", "true");
+            vReportes.Attributes.Add("aria-selected", "false");
+
+        }
+
+        protected void tabReportes(object sender, EventArgs e)
+        {
+            vLibros.Attributes.Remove("aria-selected");
+            vLibreria.Attributes.Remove("aria-selected");
+            vPromociones.Attributes.Remove("aria-selected");
+            vEliminar.Attributes.Remove("aria-selected");
+            vReportes.Attributes.Remove("aria-selected");
+
+            vLibros.Attributes.Add("aria-selected", "false");
+            vLibreria.Attributes.Add("aria-selected", "false");
+            vPromociones.Attributes.Add("aria-selected", "false");
+            vEliminar.Attributes.Add("aria-selected", "false");
+            vReportes.Attributes.Add("aria-selected", "true");
+
+          
 
         }
 

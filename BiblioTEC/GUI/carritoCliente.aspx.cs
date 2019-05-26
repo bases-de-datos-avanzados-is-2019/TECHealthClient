@@ -21,8 +21,10 @@ namespace BiblioTEC.GUI
             this.orderBooks = new List<int>();
             if (!IsPostBack)
             {
+                this.orderBooks = new List<int>();
                 getBooks();
                 calcularOferta();
+
 
                 txtDescuento.InnerText = "DESCUENTO APLICADO A LA ORDEN: -$" + this.descuento;
                 txtPrecioTotal.InnerText = "PRECIO TOTAL DE LA ORDEN: $" + this.precioTotal;
@@ -69,7 +71,7 @@ namespace BiblioTEC.GUI
                     filtro[0] = "issn";
 
                     int book = Int32.Parse(ids[i]);
-                    this.orderBooks.Add(book);
+                    orderBooks.Add(book);
                     book[] libros = request.GetBooks(string.Empty, string.Empty, string.Empty, book, 0, filtro);
                     this.precioTotal = this.precioTotal + libros[0].precioDolares;
                     HtmlGenericControl temp = getOrderDets(libros[0].nombre, libros[0].precioDolares.ToString());
@@ -95,16 +97,42 @@ namespace BiblioTEC.GUI
         protected void btnComprar_Click(object sender, EventArgs e)
         {
             string user = Application["USER"].ToString();
-            int[] bookArr = new int[this.orderBooks.Count];
+            string books = Application["LibrosOrden"].ToString();
+            books = books.Replace("libros,", string.Empty);
+            string[] ids = books.Split(',');
+            int[] bookArr = new int[books.Length];
+            int precio = this.precioTotal;
+
+            string tots = txtPrecioTotal.InnerText.ToString();
+            tots = tots.Replace("PRECIO TOTAL DE LA ORDEN: $", string.Empty);
+
+            precio = Int32.Parse(tots);
             
-            for (int i = 0; i < this.orderBooks.Count; i++)
+            for (int i = 0; i < ids.Length; i++)
             {
-                bookArr[i] = this.orderBooks.ElementAt(i);
+                bookArr[i] = Int32.Parse(ids[i]);
+            }
+
+            List<int> test = new List<int>();
+
+            for(int i = 0; i < bookArr.Length; i++)
+            {
+                if(bookArr[i] != 0)
+                {
+                    test.Add(bookArr[i]);
+                }
+            }
+
+            bookArr = new int[test.Count];
+
+            for(int i = 0; i< test.Count; i++)
+            {
+                bookArr[i] = test.ElementAt(i);
             }
 
             requestManager request = new requestManager();
             string ubicacion = request.getAdress(user);
-            placeOrder(user, bookArr, ubicacion, this.precioTotal);
+            placeOrder(user, bookArr, ubicacion, precio);
 
             
             
@@ -118,10 +146,12 @@ namespace BiblioTEC.GUI
             if (result == "Orden guardada")
             {
                 showAlert("Su Orden ha sido procesada exitosamente");
-                System.Threading.Thread.Sleep(3000);
                 string user = Application["USER"].ToString();
                 Application["LibrosOrden"] = "libros";
                 Response.Redirect("~/GUI/main.aspx/" + user);
+            } else
+            {
+                showAlert(result);
             }
         }
 

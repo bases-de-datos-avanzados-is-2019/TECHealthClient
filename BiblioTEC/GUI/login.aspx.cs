@@ -53,7 +53,14 @@ namespace BiblioTEC.GUI
 
                      break;
 
-                 case "administradr":
+                case "gerente":
+                    Application["LIBRERIA"] = result[2];
+                    //Response.Redirect("~/GUI/mainAgente.aspx/" + result[0]);
+                    txtIdentificacion.Text = result[2];
+
+                    break;
+
+                case "administradr":
                      Response.Redirect("~/GUI/mainAdmin.aspx/" + result[0]);
                      break;
 
