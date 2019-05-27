@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="mainAdmin.aspx.cs" Inherits="BiblioTEC.GUI.mainAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="mainGerente.aspx.cs" Inherits="BiblioTEC.GUI.mainGerente" %>
 
 <!DOCTYPE html>
 
