@@ -11,7 +11,7 @@ namespace BiblioTEC.Objects
         public string estado { set; get; }
         public DateTime fechaMin { set; get; }
         public DateTime fechaMax { set; get; }
-        public string tema { set;get }
+        public string tema { set; get; }
         public string[] filtros { set; get; }
     }
 }
