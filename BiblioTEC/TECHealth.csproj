@@ -334,6 +334,7 @@
     <Compile Include="Objects\bookStore2.cs" />
     <Compile Include="Objects\logIn.cs" />
     <Compile Include="Objects\orden.cs" />
+    <Compile Include="Objects\orderSearch.cs" />
     <Compile Include="Objects\rUser.cs" />
     <Compile Include="Objects\sale.cs" />
     <Compile Include="Objects\user.cs" />

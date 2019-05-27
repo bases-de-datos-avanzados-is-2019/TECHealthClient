@@ -350,14 +350,78 @@
                             </div>
 
                             <div class="row" style="margin-top:10px" id="reportesTab2" runat="server">
-                                <div class="col-lg-4 col-centered">
-                                    <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
+                                <div class="col-lg-4" style=" height:1000px" >
+                                      <div class="card border-info text-center">
+                                          <div class="row" style="margin-top:10px">
+                                                  <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Buscar un libro" style="margin-left:20px; margin-right:20px; margin-top:10px"></asp:TextBox>
+                                              
+                                              </div>
+
+                                       <div class="row" style ="margin-top:10px">
+                                           <asp:DropDownList ID="DDList_Cantidad" runat="server" CssClass="form-control" style="margin-left:20px; margin-right:20px; margin-top:10px"></asp:DropDownList>
+                                       </div>
+                                        
+                                          <div class="row" style="margin-left:20px">
+                                              <h3> Filtros </h3>
+                                          </div>
+                                       <div class="row">
+                                           
+                                           <div class="col-6 col-centered">
+                                               
+                                               <asp:CheckBox id="checkCliente" runat="server"
+                                                    AutoPostBack="False"
+                                                    Text="Cliente"
+                                                    TextAlign="Right"
+                                                    CssClass="form-check"
+                                                />
+
+                                               <asp:CheckBox id="checkTema" runat="server"
+                                                    AutoPostBack="False"
+                                                    Text="Tema"
+                                                    TextAlign="Right"
+                                                    CssClass="form-check"
+                                                />
+                                           </div>
+                                           <div class="col">
+                                               <asp:CheckBox id="checkEstado" runat="server"
+                                                    AutoPostBack="False"
+                                                    Text="Estado"
+                                                    TextAlign="Right"
+                             
+                                                    CssClass="form-check"
+                                                />
+
+                                               <asp:CheckBox id="checkFecha" runat="server"
+                                                    AutoPostBack="False"
+                                                    Text="Fecha"
+                                                    TextAlign="Right"
+                            
+                                                    CssClass="form-check"
+                                                />
+                                           </div>
+                                       </div>
+
+                                       <div class="row" style="margin-left:20px">
+                                           <h3> Rango de Fechas</h3>
+                                       </div>
+
+                                       <div class="row" style="margin-left:20px; margin-right:20px">
+                                           <h5>Desde</h5> <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control" style=" float:left; width:132px; margin-right:10px" placeholder="AAAA-MM-DD"></asp:TextBox>
+                                           <h5 style="margin-left:10px">Hasta</h5> <asp:TextBox ID="txtFechaFinal" runat="server" CssClass="form-control" style=" float:left; width:132px" placeholder="AAAA-MM-DD"></asp:TextBox>
+                                       </div>
+
+                                          <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnActualizar_Click"></asp:Button> 
+                                      </div>
+                                   </div>
+                                <div class="col-lg-5 col-centered">
+                                    <h5 style="margin-top:15px">CANTIDAD DE RESULTADOS POR LA BUSQUEDA</h5>
+                                    <div>
+                                        <h1 id="txtResultadoCantidad" runat="server"> 0 </h1>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 col-centered">
+                                <div class="col-lg-3 col-centered">
                                     <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
-                                </div>
-                                <div class="col-lg-2 col-centered">
-                                    <h5 style="margin-top:15px">TOP 3 CLIENTES</h5>
+                                    <div class="list-group" id="topClientList" runat="server"></div>
                                 </div>
                             </div>
 

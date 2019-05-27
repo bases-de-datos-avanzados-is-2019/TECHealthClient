@@ -36,6 +36,16 @@ namespace BiblioTEC.GUI
 
                 DDList_tema.DataBind();
 
+                DDList_Cantidad.Items.Add(p1);
+                DDList_Cantidad.Items.Add(p2);
+                DDList_Cantidad.Items.Add(p3);
+                DDList_Cantidad.Items.Add(p4);
+                DDList_Cantidad.Items.Add(p5);
+                DDList_Cantidad.Items.Add(p6);
+                DDList_Cantidad.Items.Add(p7);
+
+                DDList_Cantidad.DataBind();
+
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "ShowPopup();", true);
 
                 errorAlert.Visible = false;
@@ -45,6 +55,7 @@ namespace BiblioTEC.GUI
                 getRango();
                 getTheme();
                 getTopBooks();
+                getTopClients();
             }
         
 
@@ -364,6 +375,37 @@ namespace BiblioTEC.GUI
             }
         }
 
+        protected void getTopClients()
+        {
+            topClientList.Controls.Clear();
+            requestManager request = new requestManager();
+            JArray result = request.getTopClients();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                dynamic json = result.ElementAt(i);
+                string nombre = json._id;
+                int cantidad = 0;
+
+
+                try
+                {
+                    cantidad = json.pedidos;
+
+                }
+                catch (Exception e)
+                {
+                    cantidad = 0;
+
+                }
+
+
+
+                HtmlGenericControl temp = addTopClients(nombre, cantidad);
+                topClientList.Controls.Add(temp);
+            }
+        }
+
         protected HtmlGenericControl addToRange(string usuario, int min, int max)
         {
             HtmlGenericControl element = new HtmlGenericControl("a");
@@ -450,6 +492,32 @@ namespace BiblioTEC.GUI
             return element;
         }
 
+        protected HtmlGenericControl addTopClients(string _id, int pedidos)
+        {
+            HtmlGenericControl element = new HtmlGenericControl("a");
+            element.Attributes.Add("class", "list-group-item list-group-item-action flex-column align-items-start");
+            element.Attributes.Add("runat", "server");
+
+            HtmlGenericControl cabecera = new HtmlGenericControl("div");
+            cabecera.Attributes.Add("class", "d-flex justify-content-between");
+
+            HtmlGenericControl nombreLibro = new HtmlGenericControl("h5");
+            nombreLibro.Attributes.Add("class", "mb-1");
+            nombreLibro.InnerText = _id;
+
+            HtmlGenericControl minQ = new HtmlGenericControl("p");
+            minQ.Attributes.Add("style", "color:blue");
+            minQ.InnerText = "Cantidad de libros comprados: " + pedidos;
+
+            cabecera.Controls.Add(nombreLibro);
+
+            element.Controls.Add(cabecera);
+            element.Controls.Add(minQ);
+
+
+            return element;
+        }
+
         protected void tabListas_Click(object sender, EventArgs e)
         {
             reportesTab1.Visible = true;
@@ -461,6 +529,9 @@ namespace BiblioTEC.GUI
             tabPedidos.Attributes.Remove("class");
             tabPedidos.Attributes.Add("class", "nav-link");
 
+            getTopBooks();
+            getTheme();
+            getRango();
         }
 
         protected void tabPedidos_Click(object sender, EventArgs e)
@@ -474,6 +545,8 @@ namespace BiblioTEC.GUI
 
             tabPedidos.Attributes.Remove("class");
             tabPedidos.Attributes.Add("class", "nav-link active");
+
+            getTopClients();
 
         }
 
@@ -557,6 +630,50 @@ namespace BiblioTEC.GUI
 
           
 
+        }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            string tema = DDList_Cantidad.SelectedItem.Text;
+            string fechaInicio = txtFechaInicio.Text;
+            fechaInicio = fechaInicio + "T00:00:00.000Z";
+            DateTime inicio = DateTime.ParseExact(fechaInicio, "yyyy-MM-ddTHH:mm:ss.fffZ", null);
+            string fechaFinal = txtFechaFinal.Text;
+            fechaFinal = fechaFinal + "T00:00:00.000Z";
+            DateTime final = DateTime.ParseExact(fechaFinal, "yyyy-MM-ddTHH:mm:ss.fffZ", null);
+            string filtro = txtBuscar.Text;
+            bool fechabool = checkFecha.Checked;
+            bool temaBool = checkTema.Checked;
+            bool clientebool = checkCliente.Checked;
+            bool estadobool = checkEstado.Checked;
+            List<string> filters = new List<string>();
+
+            if (fechabool)
+            {
+                filters.Add("fechas");
+            }
+
+            if (temaBool)
+            {
+                filters.Add("tema");
+            }
+
+            if (clientebool)
+            {
+                filters.Add("IdCliente");
+            }
+            if (estadobool)
+            {
+                filters.Add("estado");
+            }
+
+            string[] filtross = filters.ToArray();
+
+            requestManager request = new requestManager();
+            int result = request.getQuantityOrders(filtro, filtro, inicio, final, tema, filtross);
+
+            txtResultadoCantidad.InnerText = result.ToString();
+            getTopClients();
         }
 
     }

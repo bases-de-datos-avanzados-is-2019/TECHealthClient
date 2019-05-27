@@ -561,6 +561,44 @@ namespace BiblioTEC.Logic
             return resultado;
         }
 
+        public JArray getTopClients()
+        {
+            string requestype = "order/tresClientes";
+            this.client.endPoint = this.URL + requestype;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            JArray resultado = jsonResult.resultado;
+            return resultado;
+        }
+
+        public int getQuantityOrders(string cliente, string estado, DateTime fInicio, DateTime fFinal, string tema, string[] filtros)
+        {
+            string requestype = "order/filtros/";
+
+            orderSearch order = new orderSearch()
+            {
+                idCliente = cliente,
+                estado = estado,
+                fechaMin = fInicio,
+                fechaMax = fFinal,
+                tema = tema,
+                filtros = filtros
+            };
+
+            string json = JsonConvert.SerializeObject(order);
+
+            this.client.endPoint = this.URL + requestype + json;
+            string getrequest = client.makeRequest(1);
+            getrequest = getrequest.Replace("\"", "'");
+            dynamic jsonResult = JsonConvert.DeserializeObject(getrequest);
+
+            int result = jsonResult.cantidadResultados;
+            return result;
+
+        }
+
 
 
     }
