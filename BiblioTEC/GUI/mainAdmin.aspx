@@ -410,7 +410,7 @@
                                            <h5 style="margin-left:10px">Hasta</h5> <asp:TextBox ID="txtFechaFinal" runat="server" CssClass="form-control" style=" float:left; width:132px" placeholder="AAAA-MM-DD"></asp:TextBox>
                                        </div>
 
-                                          <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnActualizar_Click"></asp:Button> 
+                                          <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-light" Text="BUSCAR" UseSubmitBehavior="false" style="margin:10px; float:right;" OnClick="btnBuscar_Click"></asp:Button> 
                                       </div>
                                    </div>
                                 <div class="col-lg-5 col-centered">

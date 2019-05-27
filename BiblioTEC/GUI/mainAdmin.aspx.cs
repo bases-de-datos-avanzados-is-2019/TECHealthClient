@@ -632,7 +632,7 @@ namespace BiblioTEC.GUI
 
         }
 
-        protected void btnActualizar_Click(object sender, EventArgs e)
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             string tema = DDList_Cantidad.SelectedItem.Text;
             string fechaInicio = txtFechaInicio.Text;
