@@ -207,6 +207,8 @@
     <Content Include="GUI\login.aspx" />
     <Content Include="GUI\main.aspx" />
     <Content Include="GUI\mainAdmin.aspx" />
+    <Content Include="GUI\mainAgente.aspx" />
+    <Content Include="GUI\mainGerente.aspx" />
     <Content Include="GUI\plantilla.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -317,6 +319,20 @@
     </Compile>
     <Compile Include="GUI\mainAdmin.aspx.designer.cs">
       <DependentUpon>mainAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\mainAgente.aspx.cs">
+      <DependentUpon>mainAgente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\mainAgente.aspx.designer.cs">
+      <DependentUpon>mainAgente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\mainGerente.aspx.cs">
+      <DependentUpon>mainGerente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GUI\mainGerente.aspx.designer.cs">
+      <DependentUpon>mainGerente.aspx</DependentUpon>
     </Compile>
     <Compile Include="GUI\plantilla.aspx.cs">
       <DependentUpon>plantilla.aspx</DependentUpon>
